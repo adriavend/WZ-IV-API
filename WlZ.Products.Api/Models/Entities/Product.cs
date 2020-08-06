@@ -5,6 +5,11 @@ namespace WlZ.Products.Api.Models.Entities
 {
     public partial class Product
     {
+        public Product()
+        {
+            OrderDetails = new HashSet<OrderDetails>();
+        }
+
         public int Id { get; set; }
         public DateTime CreationDate { get; set; }
         public string Description { get; set; }
@@ -14,5 +19,6 @@ namespace WlZ.Products.Api.Models.Entities
         public DateTime? ModifiedDate { get; set; }
 
         public virtual Subcategory IdsubcategoryNavigation { get; set; }
+        public virtual ICollection<OrderDetails> OrderDetails { get; set; }
     }
 }

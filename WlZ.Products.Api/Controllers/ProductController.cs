@@ -144,8 +144,7 @@ namespace WlZ.Products.Api.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError,
                        "Error updating data");
-            }
-           
+            }  
         }
     }
 }

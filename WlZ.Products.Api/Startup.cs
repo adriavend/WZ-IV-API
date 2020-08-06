@@ -81,6 +81,8 @@ namespace WlZ.Products.Api
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ISubCategoryRepository, SubCategoryRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
         }
     }
 }

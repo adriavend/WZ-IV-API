@@ -23,6 +23,12 @@ namespace WlZ.Products.Api
                 .ForMember(dest => dest.Category, opts => opts.MapFrom(src => src.IdsubcategoryNavigation.IdcategoryNavigation.Name))
                 ;
             CreateMap<ProductDto, Product>();
+
+            CreateMap<OrderRequestDto, Order>();
+            CreateMap<OrderDetailRequestDto, OrderDetails>();
+
+            CreateMap<Order, OrderResponseDto>();
+            CreateMap<OrderDetails, OrderDetailResponseDto>();
         }
     }
 }

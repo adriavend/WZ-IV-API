@@ -16,6 +16,8 @@ namespace WlZ.Products.Api.Models.Entities
         }
 
         public virtual DbSet<Category> Category { get; set; }
+        public virtual DbSet<Order> Order { get; set; }
+        public virtual DbSet<OrderDetails> OrderDetails { get; set; }
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<Subcategory> Subcategory { get; set; }
 
@@ -24,7 +26,7 @@ namespace WlZ.Products.Api.Models.Entities
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS2014; Database=WLZ_Products; User=sa; Password=gf637");
+                optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS2014; Database=WLZ_Products; Trusted_Connection=True");
             }
         }
 
@@ -40,6 +42,59 @@ namespace WlZ.Products.Api.Models.Entities
                     .IsRequired()
                     .HasColumnName("name")
                     .HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<Order>(entity =>
+            {
+                entity.ToTable("order");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Client)
+                    .IsRequired()
+                    .HasColumnName("client")
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.Date)
+                    .HasColumnName("date")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.Total)
+                    .HasColumnName("total")
+                    .HasColumnType("decimal(18, 2)");
+            });
+
+            modelBuilder.Entity<OrderDetails>(entity =>
+            {
+                entity.ToTable("orderDetails");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.IdOrder).HasColumnName("idOrder");
+
+                entity.Property(e => e.IdProduct).HasColumnName("idProduct");
+
+                entity.Property(e => e.Price)
+                    .HasColumnName("price")
+                    .HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.Quantity).HasColumnName("quantity");
+
+                entity.Property(e => e.Subtotal)
+                    .HasColumnName("subtotal")
+                    .HasColumnType("decimal(18, 2)");
+
+                entity.HasOne(d => d.IdOrderNavigation)
+                    .WithMany(p => p.OrderDetails)
+                    .HasForeignKey(d => d.IdOrder)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_orderDetails_order");
+
+                entity.HasOne(d => d.IdProductNavigation)
+                    .WithMany(p => p.OrderDetails)
+                    .HasForeignKey(d => d.IdProduct)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_orderDetails_product");
             });
 
             modelBuilder.Entity<Product>(entity =>
