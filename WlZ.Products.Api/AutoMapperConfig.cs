@@ -1,8 +1,4 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using WlZ.Products.Api.Models.DTOs;
 using WlZ.Products.Api.Models.Entities;
 

@@ -103,12 +103,12 @@ namespace WlZ.Products.Api.Controllers
                 }
 
                 var product = await _productRepository.GetById(productDto.Id);
-                //product = _mapper.Map<ProductDto, Product>(productDto);
+                product = _mapper.Map<ProductDto, Product>(productDto);
 
-                product.Description = productDto.Description;
-                product.Idsubcategory = productDto.Idsubcategory;
-                product.Price = productDto.Price;
-                product.Active = productDto.Active;
+                //product.Description = productDto.Description;
+                //product.Idsubcategory = productDto.Idsubcategory;
+                //product.Price = productDto.Price;
+                //product.Active = productDto.Active;
                 product.ModifiedDate = DateTime.Now;
 
                 _productRepository.Update(product);
@@ -132,7 +132,7 @@ namespace WlZ.Products.Api.Controllers
 
                 if (productToDelete == null)
                 {
-                    return NotFound($"Employee with Id = {id} not found");
+                    return NotFound($"Product with Id = {id} not found");
                 }
 
                 _productRepository.Remove(productToDelete);
