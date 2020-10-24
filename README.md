@@ -1,4 +1,4 @@
-# WZ - Interview Exercise
+# WZ - Interview Exercise - API .NETCORE
 
 > - Technologies: ASP.NET Core 2.x or higher, Entity Framework Code First, AutoMapper, SQL Server and AngularJS/Angular 2+.
 > - Separate the solution in layers: Web (UI), Model (Entities, DTOs), Data (repositories), and Services.
